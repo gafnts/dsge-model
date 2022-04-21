@@ -80,7 +80,7 @@ MODELO MACROECONÓMICO SEMI-ESTRUCTURAL 1.0
     (i - i_ss) - (i_star - i_star_ss) = (s_ex - s_ss) - (s - s_ss) + (prem - prem_ss) + e_s_ex;
     
     % (7) Tipo de cambio nominal
-    (s - s_ss) = D1*(s{-1} - s_ss) - D2*(i - i_ss) - D3*(y_star - y_star_ss) + e_s;
+    (s - s_ss) = D1*(s{-1} - s_ss) - D2*(i{-1} - i_ss) - D3*(y_star - y_star_ss) + e_s;
     
     % (8) Prima por riesgo
     (prem - prem_ss) = D4*(prem{-1} - prem_ss) + e_prem;
