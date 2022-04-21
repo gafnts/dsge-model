@@ -62,16 +62,16 @@ MODELO MACROECONÓMICO SEMI-ESTRUCTURAL 1.0
     !transition_equations
     
     % (1) Demanda agregada: Crecimiento económico interno
-    (y - y_ss) = A1*(y{-1} - y_ss) + (1 - A1)*(A2*(z{-1} - z_ss) - A3*(r{-1} - r_ss) + A4*(y_star{-1} - y_star_ss)) + e_y;
+    (y - y_ss) = A1*(y{-1} - y_ss) + (1 - A1)*(A2*(z{-1} - z_ss) - A3*(r{-1} - r_ss)) + A4*(y_star{-1} - y_star_ss) + e_y;
     
     % (2) Curva de Phillips: Inflación interna
-    (cpi - cpi_ss) = B1*(cpi_ex - cpi_ss) + (1 - B1)*(B2*(cpi_star{-1} - cpi_star_ss) + B3*(z{-1} - z_ss) + B4*(y - y_ss)) + e_cpi;
+    (cpi - cpi_ss) = B1*(cpi_ex - cpi_ss) + (1 - B1)*(B2*(cpi_star{-1} - cpi_star_ss)) + B3*(z{-1} - z_ss) + B4*(y - y_ss) + e_cpi;
     
     % (3) Expectativas de inflación
     (cpi_ex - cpi_ss) = B5*(cpi{-1} - cpi_ss) + (1 - B5)*(cpi{1} - cpi_ss) + e_cpi_ex;
     
     % (4) Regla de Taylor: Tasa de política monetaria
-    (i - i_ss) = C1*(i{-1} - i_ss) + (1 - C1)*(C2*(cpi{4} - cpi_ss) + C3*(y - y_ss)) + e_i;
+    (i - i_ss) = C1*(i{-1} - i_ss) + (1 - C1)*(C2*(cpi{4} - cpi_ss)) + C3*(y - y_ss) + e_i;
     
     % (5) Ecuación de Fischer: Tasa de interés real
     (r - r_ss) = (i - i_ss) - (cpi_ex - cpi_ss);
