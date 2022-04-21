@@ -5,36 +5,96 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
 ```
 
 ## Ecuaciones del sistema
 
 $$
 \begin{split}
-& \textbf{(1) Demanda agregada:} \\ &(y_{t} - y_{ss}) = \ A1\cdot(y_{t-1} - y_{ss}) + (1 - A1)\cdot(A2\cdot(z_{t-1} - z_{ss})) \ - A3\cdot(r_{t-1} - r_{ss}) + A4\cdot(y^{*}_{t-1} - y^{*}_{ss}) + \epsilon_{y} \\
-& \textbf{(2) Curva de Phillips:} \\ &(cpi_{t} - cpi_{ss}) = \ B1\cdot(cpi^{ex} - cpi_{ss}) + (1 - B1)\cdot(B2\cdot(cpi^{*}_{t-1} - cpi^{*}_{ss})) \ + B3\cdot(z_{t-1} - z_{ss}) + B4\cdot(y_{t} - y_{ss}) + \epsilon_{cpi} \\
-& \textbf{(3) Expectativas de inflación:} \\ &(cpi^{ex}_t - cpi_{ss}) = \ B5\cdot(cpi_{t-1} - cpi_{ss}) + (1 - B5)\cdot(cpi_{t+1} - cpi_{ss}) + \epsilon_{cpi^{ex}} \\
-& \textbf{(4) Regla de Taylor:} \\ &(i_t - i_{ss}) = \ C1\cdot(i_{t-1} - i_{ss}) + (1 - C1)\cdot(C2\cdot(cpi_{t+4} - cpi_{ss})) \ + C3\cdot(y_t - y_{ss}) + \epsilon_i \\
-& \textbf{(5) Ecuación de Fischer:} \\ &(r_{t} - r_{ss}) = (i_{t} - i_{ss}) - (cpi^{ex}_t - cpi_{ss}) \\
-& \textbf{(6) Paridad no cubierta de tasas de interés:} \\ &(i_{t} - i_{ss}) - (i^{*}_t - i^{*}_{ss}) = (s^{ex}_t - s_{ss}) + (prem_t - prem_{ss}) + \epsilon_{s^{ex}} \\
+& \textbf{(1) Demanda agregada:} \\ &(y_{t} - y_{ss}) = \ A1\cdot(y_{t-1} - y_{ss}) + (1 - A1)\cdot(A2\cdot(z_{t-1} - z_{ss}) \ - A3\cdot(r_{t-1} - r_{ss}) + A4\cdot(y^{*}_{t-1} - y^{*}_{ss})) + \epsilon_{y} \\
+& \textbf{(2) Curva de Phillips:} \\ &(\pi_{t} - \pi_{ss}) = \ B1\cdot(\pi^{e} - \pi_{ss}) + (1 - B1)\cdot(B2\cdot(\pi^{*}_{t-1} - \pi^{*}_{ss}) \ + B3\cdot(z_{t-1} - z_{ss}) + B4\cdot(y_{t} - y_{ss})) + \epsilon_{\pi} \\
+& \textbf{(3) Expectativas de inflación:} \\ &(\pi^{e}_t - \pi_{ss}) = \ B5\cdot(\pi_{t-1} - \pi_{ss}) + (1 - B5)\cdot(\pi_{t+1} - \pi_{ss}) + \epsilon_{\pi^{e}} \\
+& \textbf{(4) Regla de Taylor:} \\ &(i_t - i_{ss}) = \ C1\cdot(i_{t-1} - i_{ss}) + (1 - C1)\cdot(C2\cdot(\pi_{t+4} - \pi_{ss}) \ + C3\cdot(y_t - y_{ss})) + \epsilon_i \\
+& \textbf{(5) Ecuación de Fischer:} \\ &(r_{t} - r_{ss}) = (i_{t} - i_{ss}) - (\pi^{e}_t - \pi_{ss}) \\
+& \textbf{(6) Paridad no cubierta de tasas de interés:} \\ &(i_{t} - i_{ss}) - (i^{*}_t - i^{*}_{ss}) = (s^{e}_t - s_{ss}) + (prem_t - prem_{ss}) + \epsilon_{s^{e}} \\
 &\textbf{(7) Tipo de cambio nominal:} \\ &(s_t - s_{ss}) = D1\cdot(s_{t-1} - s_{ss}) - D2\cdot(i_t - i_{ss}) - D3\cdot(y^{*}_t - y^{*}_{ss}) + \epsilon_s \\
 &\textbf{(8) Prima por riesgo:} \\ &(prem_t - prem_{ss}) = D4\cdot(prem_{t-1} - prem_{ss}) + \epsilon_{prem} \\
-&\textbf{(9) Tipo de cambio real:} \\ &(z_t - z_{ss}) = D5\cdot(z_{t-1} - z_{ss}) + (1 - D5)\cdot((s_t - s_{ss}) + (cpi^{*}_t - cpi^{*}_{ss}) - (cpi_t - cpi_{ss})) + \epsilon_z \\
-&\textbf{(10) Inflación externa:} \\ &(cpi^{*}_t - cpi^{*}_{ss}) = Z1 \cdot (cpi^{*}_{t-1} - cpi^{*}_{ss}) + \epsilon_{cpi^{*}} \\
+&\textbf{(9) Tipo de cambio real:} \\ &(z_t - z_{ss}) = D5\cdot(z_{t-1} - z_{ss}) + (1 - D5)\cdot((s_t - s_{ss}) + (\pi^{*}_t - \pi^{*}_{ss}) - (\pi_t - \pi_{ss})) + \epsilon_z \\
+&\textbf{(10) Inflación externa:} \\ &(\pi^{*}_t - \pi^{*}_{ss}) = Z1 \cdot (\pi^{*}_{t-1} - \pi^{*}_{ss}) + \epsilon_{\pi^{*}} \\
 &\textbf{(11) Tasa de interés externa:} \\ &(i^{*}_t - i^{*}_{ss}) = Z2 \cdot (i^{*}_{t-1} - i^{*}_{ss}) + \epsilon_{i^{*}} \\
 &\textbf{(12) Crecimiento económico externo:} \\ &(y^{*}_t - y^{*}_{ss}) = Z3 \cdot (y^{*}_{t-1} - y^{*}_{ss}) + \epsilon_{y^{*}}
 \end{split}
 $$
 
-## Demanda agregada
+## Crecimiento económico interno
 
 ### Choque positivo en $y$
 
 $$
+\tag{1}
 \uparrow\ y = 
 \begin{cases}
-\uparrow \pi \ \rightarrow \ \uparrow i \ \rightarrow \ \uparrow r; \ \text{Canal de demanda agregada} \\
-0
+\uparrow \pi \ \rightarrow \ \uparrow i \ \rightarrow \ \uparrow r; \ &\text{Canal de demanda agregada} \\
+\downarrow s \ \rightarrow \ \downarrow z \ ; \ &\text{Canal de tipo de cambio} \\
+\uparrow \pi \ \rightarrow  \ \uparrow \pi^{e} ; \ &\text{Canal de expectativas inflacionarias} \\
+\downarrow s \ \rightarrow \ \uparrow s^e; &\text{Canal de expectativas cambiarias}
 \end{cases}
 $$
+
+*Análisis macroeconómico.* Un choque del 1% en la tasa de crecimiento económico interno genera un incremento en el ritmo inflacionario interno. Este efecto produce a la vez un incremento en la tasa de interés de política monetaria (debido a que la autoridad monetaria buscará desacelerar el ritmo del crecimiento de ambas variables) y, por ende, un aumento en la tasa de interés real. El aumento de las tasas de interés produce mayores flujos de inversión hacia el país, cuestión que aprecia el tipo de cambio, tanto real como nominal. Esta apreciación cambiaria afecta la competitividad de las exportaciones en los mercados internacionales, contribuyendo a devolver al ritmo de crecimiento económico a su estado estacionario en el mediano plazo. Además, debido a que el tipo de cambio nominal se aprecia en el corto plazo, los agentes económicos esperan que, en el mediano plazo, el tipo de cambio nominal se deprecie. El resto de variables permanece sin cambios.
+
+### Choque negativo en $y$
+
+$$
+\tag{2}
+\downarrow\ y = 
+\begin{cases}
+\downarrow \pi \ \rightarrow \ \downarrow i \ \rightarrow \ \downarrow r; \ &\text{Canal de demanda agregada} \\
+\uparrow s \ \rightarrow \ \uparrow z \ ; \ &\text{Canal de tipo de cambio} \\
+\downarrow \pi \ \rightarrow  \ \downarrow \pi^{e} ; \ &\text{Canal de expectativas inflacionarias} \\
+\uparrow s \ \rightarrow \ \downarrow s^e; &\text{Canal de expectativas cambiarias}
+\end{cases}
+$$
+
+*Análisis macroeconómico.* Un choque del -1% en la tasa de crecimiento económico interno genera una disminución en el ritmo inflacionario interno. Este efecto produce a la vez una reducción de la tasa de interés de política monetaria (debido a que el banco central buscará dinamizar el ritmo del crecimiento económico) y, por ende, la tasa de interés real también disminuirá. La reducción en las tasas de interés produce menores flujos de inversión hacia el país, cuestión que deprecia el tipo de cambio, tanto real como nominal, contribuyendo a retornar al crecimiento económico a su estado estacionario en el mediano plazo por vía de un aumento en la competitividad de las exportaciones en los mercados internacionales. Debido a que el tipo de cambio nominal se deprecia en el corto plazo, los agentes económicos esperan que, en el mediano plazo, el tipo de cambio nominal se aprecie. El resto de variables permanece sin cambios.
+
+## Expectativas de inflación
+
+### Choque positivo en $\pi$
+
+$$
+\tag{3}
+\uparrow\ \pi^e = 
+\begin{cases}
+\uparrow \pi \ \rightarrow \ \uparrow i \ \rightarrow \ \uparrow r \ \rightarrow \ \uparrow y; \ &\text{Canal de demanda agregada} \\
+\downarrow s \ \rightarrow \ \downarrow z \ ; \ &\text{Canal de tipo de cambio} \\
+\uparrow \pi \ \rightarrow  \ \uparrow \pi^{e} ; \ &\text{Canal de expectativas inflacionarias} \\
+\downarrow s \ \rightarrow \ \uparrow s^e; &\text{Canal de expectativas cambiarias}
+\end{cases}
+$$
+
+*Análisis macroeconómico.* Un choque del 1% en la tasa de crecimiento económico interno genera un incremento en el ritmo inflacionario interno. Este efecto produce a la vez un incremento en la tasa de interés de política monetaria (debido a que la autoridad monetaria buscará desacelerar el ritmo del crecimiento de ambas variables) y, por ende, un aumento en la tasa de interés real. El aumento de las tasas de interés produce mayores flujos de inversión hacia el país, cuestión que aprecia el tipo de cambio, tanto real como nominal. Esta apreciación cambiaria afecta la competitividad de las exportaciones en los mercados internacionales, contribuyendo a devolver al ritmo de crecimiento económico a su estado estacionario en el mediano plazo. Además, debido a que el tipo de cambio nominal se aprecia en el corto plazo, los agentes económicos esperan que, en el mediano plazo, el tipo de cambio nominal se deprecie. El resto de variables permanece sin cambios.
+
+\vspace{2mm}
+
+\centering
+
+![](images/cpi_ex_pos.jpg)
+
+\raggedright
+
+### Choque negativo en $\pi$
+
+$$
+\tag{4}
+\downarrow\ \pi = 
+\begin{cases}
+\downarrow \pi \ \rightarrow \ \downarrow i \ \rightarrow \ \downarrow r; \ &\text{Canal de demanda agregada} \\
+\uparrow s \ \rightarrow \ \uparrow z \ ; \ &\text{Canal de tipo de cambio} \\
+\downarrow \pi \ \rightarrow  \ \downarrow \pi^{e} ; \ &\text{Canal de expectativas inflacionarias} \\
+\uparrow s \ \rightarrow \ \downarrow s^e; &\text{Canal de expectativas cambiarias}
+\end{cases}
+$$
+
+*Análisis macroeconómico.* Un choque del -1% en la tasa de crecimiento económico interno genera una disminución en el ritmo inflacionario interno. Este efecto produce a la vez una reducción de la tasa de interés de política monetaria (debido a que el banco central buscará dinamizar el ritmo del crecimiento económico) y, por ende, la tasa de interés real también disminuirá. La reducción en las tasas de interés produce menores flujos de inversión hacia el país, cuestión que deprecia el tipo de cambio, tanto real como nominal, contribuyendo a retornar al crecimiento económico a su estado estacionario en el mediano plazo por vía de un aumento en la competitividad de las exportaciones en los mercados internacionales. Debido a que el tipo de cambio nominal se deprecia en el corto plazo, los agentes económicos esperan que, en el mediano plazo, el tipo de cambio nominal se aprecie. El resto de variables permanece sin cambios.
