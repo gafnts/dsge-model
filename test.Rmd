@@ -1,0 +1,16 @@
+---
+title: 'Testing Rmd in VS Code'
+output: pdf_document
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+```
+# Header
+
+## Subtitle
+
+### Level 3
+
+Test
+
